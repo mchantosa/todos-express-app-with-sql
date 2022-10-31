@@ -4,21 +4,21 @@ block main
   section#todos(class=isDoneTodoList ? "done" : "")
     header
       h2= todoList.title
-      ul
-        if hasUndoneTodos
+        ul
+          if hasUndoneTodos
+            li
+              form.complete_all(action=`/lists/${todoList.id}/complete_all`
+                                method="post")
+                button.check(type="submit") Complete All
           li
-            form.complete_all(action=`/lists/${todoList.id}/complete_all`
-                              method="post")
-              button.check(type="submit") Complete All
-        li
-          form(action=`/lists/${todoList.id}/edit` method="get")
-            button.edit(type="submit") Edit List
+            form(action=`/lists/${todoList.id}/edit` method="get")
+              button.edit(type="submit") Edit List
 
     ul
       each todo in todoList.todos
         li(class=todo.done ? "done" : "")
           form.check(action=`/lists/${todoList.id}/todos/${todo.id}/toggle`
-                     method="post")
+                    method="post")
             input(type="hidden" name="done" value=!todo.done)
             button Done
 
@@ -26,7 +26,6 @@ block main
           form.delete(action=`/lists/${todoList.id}/todos/${todo.id}/destroy`
                       method="post")
             button Delete
-
     form(action=`/lists/${todoList.id}/todos` method="post")
       dl
         dt

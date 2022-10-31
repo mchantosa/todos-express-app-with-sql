@@ -1,4 +1,5 @@
 session-store.db
+lib/users.sql
 #Mac Specific in addition to the below 
 .DS_Store
 
